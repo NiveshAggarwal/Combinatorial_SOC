@@ -1,7 +1,6 @@
 #include<iostream>
 #include<cmath>
 using namespace std;
-
 void update(int pos[], int *weight, int n, int m,int p){
     while(m>0){
     int b[n];
