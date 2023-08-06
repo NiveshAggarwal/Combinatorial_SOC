@@ -2,6 +2,17 @@
 #include<math.h>
 using namespace std;
 
+bool network(int n, int m, int arr[]){
+for (int i=1;i<m+1;i++){
+    if(arr[((n)*(m+1)+i)]&&(arr[n*(m+1)]!=i)&&(arr[i]==0||network(arr[i],m,arr))){
+        arr[i]=n;
+        arr[n*(m+1)]=i;
+        return 1;
+    }
+}
+return 0;
+}
+
 
 bool check(int n, int m, int arr[]){
     bool flag=1;
@@ -50,21 +61,24 @@ int main(){
 //         }
 //         cout<<endl;}
     if (check(n,m,arr)){
-        for (int i=n+1;i>0;i--){
-            for (int j=1;j<m+1;j++){
-                if (arr[j]==0){
-                    arr[j]=1;
-                    if (check(i-1,m,arr)){
-                        arr[i*(m+1)]=j;
-                        break;
-                    }
-                    else arr[j]=0;
-                }
-            }
+        for (int i=1;i<n+1;i++){
+            // for (int j=1;j<m+1;j++){
+            //     if (arr[j]==0){
+            //         arr[j]=1;
+            //         if (check(i-1,m,arr)){
+            //             arr[i*(m+1)]=j;
+            //             break;
+            //         }
+            //         else arr[j]=0;
+            //     }
+            // }
+            network(i,m,arr);
+            //cout<<i<<endl;
         }
         cout<<endl;
         for (int i=1;i<n+1;i++){
         cout<<i<<" "<<arr[i*(m+1)]<<endl;
+        
     }
     }
     else cout<<-1;
